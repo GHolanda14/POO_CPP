@@ -6,13 +6,15 @@ using namespace std;
 struct Carro{
 	public:
 		float tanque;
-		int qnt_pessoas,max_pess = 2, max_l = 10;
+		int qnt_pessoas,max_pess, max_l;
 		float km;
 
-		Carro(float tanque = 0, int qnt_pessoas = 0, float km = 0){
+		Carro(float tanque = 0, int qnt_pessoas = 0, float km = 0,int max_l = 10,int max_pess = 2){
 			this->tanque = tanque;
 			this->qnt_pessoas = qnt_pessoas;
 			this->km = km;
+			this->max_l = max_l;
+			this->max_pess = max_pess;
 		}
 		
 		string toString(){
@@ -42,11 +44,8 @@ struct Carro{
 		}
 
 		void fuel(int qnt){
-			if(tanque+qnt > max_l){
-				tanque = max_l;
-			}else{
-				tanque += qnt;
-			}
+			tanque += max_l;
+			tanque = (tanque > max_l) ? max_l : tanque
 			cout<<"done"<<endl;
 		}
 
@@ -70,7 +69,7 @@ struct Carro{
 
 int main(){
 	string op;
-	Carro c;
+	Carro carro;
 
 	while(true){
 		cin>>op;
@@ -79,27 +78,27 @@ int main(){
 			puts("in,out,show,drive,fuel");
 		}
 		else if(op == "show"){
-			cout<<c.toString()<<endl;;
+			cout<<carro.toString()<<endl;;
 		}
 		else if(op == "in"){
-			if(c.embarcar()){
+			if(carro.embarcar()){
 				cout<<"done"<<endl;
 			}
 		}
 		else if(op == "out"){
-			if(c.desembarcar()){
+			if(carro.desembarcar()){
 				cout<<"done"<<endl;
 			}
 		}
 		else if(op == "fuel"){
-			int qnt;
-			cin>>qnt;
-			c.fuel(qnt);
+			int km;
+			cin>>km;
+			carro.fuel(km);
 		}
 		else if(op == "drive"){
-			int qnt;
-			cin>>qnt;
-			if(c.drive(qnt)){
+			int km;
+			cin>>km;
+			if(carro.drive(km)){
 				cout<<"done"<<endl;
 			}
 		}
@@ -107,6 +106,5 @@ int main(){
 			break;
 		}
 	}
-
 	return 0;
 }
