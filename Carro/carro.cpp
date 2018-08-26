@@ -5,7 +5,7 @@ using namespace std;
 
 struct Carro{
 	public:
-		float tanque;
+		float tanque=0;
 		int qnt_pessoas,max_pess, max_l;
 		float km;
 
@@ -45,7 +45,7 @@ struct Carro{
 
 		void fuel(int qnt){
 			tanque += max_l;
-			tanque = (tanque > max_l) ? max_l : tanque
+			tanque = (tanque > max_l) ? max_l : tanque;
 			cout<<"done"<<endl;
 		}
 
