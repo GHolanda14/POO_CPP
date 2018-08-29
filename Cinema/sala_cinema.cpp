@@ -8,50 +8,45 @@ struct Cliente{
 	public:
 		string nome;
 		string fone;
-		bool existe;
 	
-	Cliente(string nome = "Xuxa",string fone = "4002-8922",bool existe = true){
+	Cliente(string nome = "Xuxa",string fone = "4002-8922"){
 		this->nome = nome;
 		this->fone = fone;
-		this->existe = existe;
 	}
 
 	string toString(){
 		stringstream ss;
-
-		if(!existe){
-			ss<<"-";
-		}
-		
-		else{
-			ss<<this->nome<<":"<<this->fone;
-		}
-
+		ss<<this->nome<<":"<<this->fone;
 		return ss.str();
 	}
 };
 
 struct Sala{
-	vector<Cliente> cadeiras;
+	vector<Cliente*> cadeiras;
 
-    Sala(int qtd = 0){
-        for(int i = 0; i < qtd; i++)
-            cadeiras.push_back(Cliente("", "", false));
-    }
+    Sala(int qtd = 0):
+        cadeiras(qtd,nullptr)
+	{
+	}
 
-    bool reservar(Cliente cliente, int ind){
+	~Sala(){
+    	for(Cliente * cli : cadeiras)
+        	delete(cli);
+	}
+
+    bool reservar(Cliente * cliente, int ind){
     	int qnt = cadeiras.size();
 
     	if((ind < 0) || (ind >= qnt)){
     		cout<<"fail: essa cadeira nao existe"<<endl;
     		return false;
     	}
-    	if(cadeiras[ind].existe){
+    	if(cadeiras[ind] != nullptr){
     		cout<<"fail: essa cadeira ja esta ocupada"<<endl;
     		return false;
     	}
     	for(int i = 0; i < qnt;i++){
-    		if(cadeiras[i].existe && (cadeiras[i].nome == cliente.nome)){
+    		if(cadeiras[i] != nullptr && (cadeiras[i]->nome == cliente->nome)){
     			cout<<"fail: voce ja esta no cinema"<<endl;
     			return false;
     		}
@@ -64,8 +59,8 @@ struct Sala{
     	int qnt = cadeiras.size();
 
     	for(int i = 0; i < qnt; i++){
-    		if(cadeiras[i].nome == nome){
-    			cadeiras[i] = Cliente("","",false);
+    		if(cadeiras[i]->nome == nome){
+    			cadeiras[i] = nullptr;
     			return true;
     		}
     	}
@@ -75,9 +70,12 @@ struct Sala{
 
     string toString(){
         stringstream ss;
-        ss << "[ ";
-        for(Cliente cliente : cadeiras)
-            ss << cliente.toString() << " ";
+        ss << "[";
+        for(Cliente * cliente : cadeiras)
+			if(cliente == nullptr)
+				ss<<"-";
+			else
+            	ss << cliente->toString() << " ";
         ss << "]";
         return ss.str();
     }
@@ -108,7 +106,7 @@ int main(){
 			string nome,fone;
 			int ind;
 			cin>>nome>>fone>>ind;
-			if(sala.reservar(Cliente(nome,fone),ind))
+			if(sala.reservar(new Cliente(nome,fone),ind))
 				cout<<"done"<<endl;
 		}
 		else if(op == "cancelar"){

@@ -1,0 +1,19 @@
+new 5 2
+show
+in davi 17
+show
+in joao 103
+show
+in ana 35
+show
+in rex 20
+in bia 16
+show
+out davi
+show
+in aragao 96
+show
+out marcelo
+out ana
+in bia 20
+fim
