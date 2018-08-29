@@ -58,7 +58,7 @@ struct Topic{
     bool embarcar(Passageiro * passageiro){
         for(Passageiro * cadeira : cadeiras){
             if(cadeira != nullptr){
-                if(passageiro->id == cadeira->id){
+                if(passageiro->id = cadeira->id){
                     cout<<"fail: "<<cadeira->id<<" ja esta no trem"<<endl;
                     return false;
                 }
