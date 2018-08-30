@@ -32,6 +32,11 @@ struct Topic{
         this->prioridade = prioridade;
     }
 
+    ~Topic(){
+        for(Passageiro* passageiro : cadeiras)
+            delete(passageiro);
+    }
+
     string toString(){
         stringstream ss;
         int p = 0;
