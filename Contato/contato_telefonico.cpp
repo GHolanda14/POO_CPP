@@ -61,18 +61,16 @@ struct Contato{
 
 		Contato rmFone(int ind,vector<Contato> contato,string id){
 			int qnt = contato[ind].telefones.size();
-			bool existe = false;
+
 			for(int i = 0;i < qnt; i++){
 				if(contato[ind].telefones[i].id == id){
-					existe = true;
 					contato[ind].telefones.erase(contato[ind].telefones.begin() +i);
 					cout<<"done"<<endl;
+					return contato[ind];		
 				}
 			}
 			
-			if(!existe){
-				cout<<"fail: fone "<<id<<"nao existe"<<endl;
-			}
+			cout<<"fail: fone "<<id<<"nao existe"<<endl;
 			
 			return contato[ind];
 		}
@@ -93,7 +91,7 @@ vector<string> split(string str, char delimiter = ' ')
 
     int start = 0;
 
-    for(int i = 0; i < str.length(); ++i) {
+    for(int i = 0; i < (int) str.length(); ++i) {
         if(str[i] == delimiter) {
             ret.push_back(str.substr(start, i-start));
             start = i+1;
@@ -116,10 +114,13 @@ int main(){
 		stringstream ss(txt);
 
 		getline(ss,op,' ');
+		cout<<op<<endl;
+		if(op == "end") break;
+		
 		if(op == "update"){
 			ss>>nome;
 			vector<string> v = split(ss.str(),' ');
-			for(int i = 2; i < v.size();i++){
+			for(int i = 2; i < (int) v.size();i++){
 				stringstream s(v[i]);
 				getline(s,id,':');
 				s>>numero;	
@@ -158,7 +159,6 @@ int main(){
 			}
 			
 			else if(op == "init"){
-				int qnt = contatos.size();
 				if(!existe(nome,contatos)){
 					contatos.push_back(Contato(nome));
 					cout<<"done"<<endl;

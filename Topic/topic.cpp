@@ -39,28 +39,19 @@ struct Topic{
 
     string toString(){
         stringstream ss;
-        int p = 0;
         ss<<"[";
-        for(Passageiro * passa : cadeiras){
-            if(passa == nullptr){
-                if(p < prioridade)
-                    ss<<"@ ";
-                else
-                    ss<<"# ";
-            }
-            else{
-                if(p < prioridade)
-                    ss<<"@"<<passa->toString()<<" ";
-                else
-                    ss<<"#"<<passa->toString()<<" ";
-            }
-            p++;
+        for(int i = 0; i < (int)cadeiras.size(); i++){
+            ss<<(i<prioridade ? '@' : '#');
+            ss<<(cadeiras[i] != nullptr ? cadeiras[i]->toString() : "");
+            ss<<" ";
         }
         ss<<"]";
         return ss.str();
     }
 
     bool embarcar(Passageiro * passageiro){
+        if((int)cadeiras.size()==0) return false;
+
         for(Passageiro * cadeira : cadeiras){
             if(cadeira != nullptr){
                 if(passageiro->id == cadeira->id){
@@ -87,6 +78,14 @@ struct Topic{
                     break;
                 }
             }
+
+            /*alternativa
+            for(int i = 0; i < prioridade;i++){
+                if(cadeiras[i]==nullptr){
+                    cadeiras[i] = passageiro;
+                    return true;
+                }
+            }*/
         }
         else{
             for(int i = 0; i < tam;i++){
