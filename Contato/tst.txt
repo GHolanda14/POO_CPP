@@ -1,11 +1,8 @@
-init joao
-init davi
-addFone davi tim 88
-addFone davi claro 13
-addFone davi nextel 73
-addFone joao oi 12
-addFone joao vivo 99
+nome davi
+add oi 99
+add tim 88
+add claro 83
 show
-rmFone davi claro 13
+rm 2
 show
 end
