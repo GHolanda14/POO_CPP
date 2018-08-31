@@ -33,7 +33,7 @@ struct Contato{
         
         ss<<nome<<"=>";
         for(int i = 0; i < (int) fones.size();i++){
-            ss<<"["<<i<<fones[i].toString()<<"]";
+            ss<<"["<<i<<":"<<fones[i].toString()<<"]";
         }
         return ss.str();
     }
