@@ -1,59 +1,104 @@
 #include <iostream>
-#include <vector>
 #include <sstream>
+#include <vector>
+#include <cstring>
+
+using namespace std;
 
 struct Fone{
-    string id;
-    string fone;
-    Fone(string id = "", string fone=""){
-        this->id = id;
-        this->fone = fone;
-    }
+    string label;
+    string numero;
 
+    Fone(string label="",string numero=""){
+        this->label = label;
+        this->numero = numero;
+    }
 };
 
 struct Contato{
-    string id;
-    Contato(string id = "Ze mane"){
-        id(id);
+    string nome;
+    vector<Fone> fones;
+
+    Contato(string nome = "vazio"){
+        this->nome = nome;
     }
+
     string toString(){
         stringstream ss;
-        ss<<id<<":";
-
-        for(auto fone : fones){
-            ss<<fone.toString();
+        
+        ss<<nome<<"=>";
+        for(int i = 0; i < (int) fones.size();i++){
+            ss<<"["<<i<<":"<<fones[i].label<<":"<<fones[i].numero<<"]";
         }
-
         return ss.str();
     }
-};
 
-struct Controller{
-    Contato cont;
-
-    string shell(string line){
-        stringstream in(line);
-        stringstream out;
-
-        string op;
-
+    bool addFone(Fone fone){
+        fones.push_back(fone);
+        return true;
     }
 
-    void exec(){
-        string line;
-        while(true){
-            getline(cin,line);
-            if(line == "end"){
-                break;
+    bool rmFone(int n){
+        for(int i = 0; i< (int) fones.size();i++){
+            if(i == n){
+                fones.erase(fones.begin()+i);
+                return true;
             }
-            cout<< " " << shel(line) <<endl;
         }
+        cout<<"failure: indice nao encontrado"<<endl;
+        return false;
     }
 };
 
 int main(){
-    Controller controller;
-    controller.exec();
+    Contato contato;
+    string op;
+    string txt;
+
+    while(true){
+        getline(cin,txt);
+        stringstream ss(txt);
+
+        getline(ss,op,' ');
+        if(op == "help"){
+            cout<<"nome show add rm update"<<endl;
+        }
+        else if(op == "show"){
+            cout<<contato.toString()<<endl;
+        }
+        else if(op == "nome"){
+            string nome;
+            ss>>nome;
+
+            contato = Contato(nome);
+            cout<<"success"<<endl;
+        }
+        else if(op == "add"){
+            string numero, label;
+            ss>>label>>numero;
+
+            if(contato.addFone(Fone(label,numero))) cout<<"success"<<endl;
+        }
+        else if(op == "rm"){
+            int n;
+            ss>>n;
+
+            if(contato.rmFone(n))cout<<"success"<<endl;
+        }
+        else if(op == "update"){
+            string label,numero;
+            contato.fones.clear();
+            string txt;
+            while(ss>>txt){
+                getline(ss,txt,' ');
+                stringstream a(txt);
+                getline(a,label,':');
+                ss>>numero;
+
+                contato.addFone(Fone(label,numero));
+            }
+        }
+    }
+
     return 0;
 }
