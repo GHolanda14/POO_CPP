@@ -1,0 +1,8 @@
+nome davi
+add oi 99
+add tim 88
+add claro 83
+show
+rm 2
+show
+end
