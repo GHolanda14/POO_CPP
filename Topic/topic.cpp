@@ -79,13 +79,6 @@ struct Topic{
                 }
             }
 
-            /*alternativa
-            for(int i = 0; i < prioridade;i++){
-                if(cadeiras[i]==nullptr){
-                    cadeiras[i] = passageiro;
-                    return true;
-                }
-            }*/
         }
         else{
             for(int i = 0; i < tam;i++){
