@@ -13,6 +13,11 @@ struct Fone{
         this->label = label;
         this->numero = numero;
     }
+    string toString(){
+        stringstream ss;
+        ss<<label<<":"<<numero;
+        return ss.str();
+    }
 };
 
 struct Contato{
@@ -28,7 +33,7 @@ struct Contato{
         
         ss<<nome<<"=>";
         for(int i = 0; i < (int) fones.size();i++){
-            ss<<"["<<i<<":"<<fones[i].label<<":"<<fones[i].numero<<"]";
+            ss<<"["<<i<<fones[i].toString()<<"]";
         }
         return ss.str();
     }
