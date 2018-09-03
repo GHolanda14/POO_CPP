@@ -19,8 +19,9 @@ struct Fone{
     }
     bool validate(string num){
         string valido = "0123456789().";
-        for(char n : num){
-            for(int i = 0; i < (int) valido.size();i++){
+        int i;
+        for(char n : num){            
+            for(i = 0; i < (int) valido.size();i++){
                 if(n == valido[i]){
                     break;
                 }
@@ -98,6 +99,10 @@ int main(){
         stringstream ss(txt);
 
         getline(ss,op,' ');
+        cout<<op<<endl;
+        if(op == "end"){
+            break;
+        }
         if(op == "help"){
             cout<<"nome show add rm update"<<endl;
         }
@@ -125,6 +130,10 @@ int main(){
             if(contato.rmFone(n))cout<<"success"<<endl;
         }
         else if(op == "update"){
+            string nome;
+            ss>>nome;
+            contato = Contato(nome);
+            
             string txt;
             getline(ss,txt);
             if(contato.upFone(txt))cout<<"success"<<endl;

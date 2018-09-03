@@ -5,4 +5,11 @@ add claro 83
 show
 rm 2
 show
+update maria vivo:1234 oi:345 claro:55
+show
+add tim 9a9
+add tim (55)99.99
+show
+update maria vivo:89a3 claro:293 tim:9a,s2 oi:88
+show
 end
