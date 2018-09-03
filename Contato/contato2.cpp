@@ -1,7 +1,6 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include <cstring>
 
 using namespace std;
 
@@ -17,6 +16,22 @@ struct Fone{
         stringstream ss;
         ss<<label<<":"<<numero;
         return ss.str();
+    }
+    bool validate(string num){
+        string valido = "0123456789().";
+        for(char n : num){
+            int i = 0;
+            for(char val : valido){
+                if(n == val){
+                    break;
+                }
+                i++;
+            }
+            if(i == (int)valido.size()){
+                return false;
+            }
+        }
+        return true;
     }
 };
 
@@ -39,8 +54,11 @@ struct Contato{
     }
 
     bool addFone(Fone fone){
-        fones.push_back(fone);
-        return true;
+        if(fone.validate(fone.numero)){
+            fones.push_back(fone);
+            return true;
+        }
+        return false;
     }
 
     bool rmFone(int n){
@@ -52,6 +70,23 @@ struct Contato{
         }
         cout<<"failure: indice nao encontrado"<<endl;
         return false;
+    }
+    
+    bool upFone(string t){
+        stringstream ss(t);
+        string label,numero;
+        fones.clear();
+        string txt;
+        Fone fone;
+        while(ss>>txt){ 
+            stringstream a(txt);
+            getline(a,label,':');
+            getline(a,numero,' ');
+            if(fone.validate(numero)){
+                addFone(Fone(label,numero));
+            }
+        }
+        return true;
     }
 };
 
@@ -83,6 +118,7 @@ int main(){
             ss>>label>>numero;
 
             if(contato.addFone(Fone(label,numero))) cout<<"success"<<endl;
+            else cout<<"failure: fone invalido"<<endl;
         }
         else if(op == "rm"){
             int n;
@@ -91,17 +127,9 @@ int main(){
             if(contato.rmFone(n))cout<<"success"<<endl;
         }
         else if(op == "update"){
-            string label,numero;
-            contato.fones.clear();
             string txt;
-            while(ss>>txt){
-                getline(ss,txt,' ');
-                stringstream a(txt);
-                getline(a,label,':');
-                ss>>numero;
-
-                contato.addFone(Fone(label,numero));
-            }
+            getline(ss,txt);
+            if(contato.upFone(txt))cout<<"success"<<endl;
         }
     }
 
