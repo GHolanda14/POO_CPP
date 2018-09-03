@@ -20,12 +20,10 @@ struct Fone{
     bool validate(string num){
         string valido = "0123456789().";
         for(char n : num){
-            int i = 0;
-            for(char val : valido){
-                if(n == val){
+            for(int i = 0; i < (int) valido.size();i++){
+                if(n == valido[i]){
                     break;
                 }
-                i++;
             }
             if(i == (int)valido.size()){
                 return false;
