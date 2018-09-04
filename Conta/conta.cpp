@@ -99,7 +99,7 @@ struct Conta{
                 }
             }
         }
-        return true;
+        return false;
     }
 
     void pushOperation(string label, float valor, float saldo){
