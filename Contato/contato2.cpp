@@ -126,7 +126,6 @@ int main(){
         else if(op == "rm"){
             int n;
             ss>>n;
-
             if(contato.rmFone(n))cout<<"success"<<endl;
         }
         else if(op == "update"){

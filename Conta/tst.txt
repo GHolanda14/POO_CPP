@@ -1,0 +1,10 @@
+init 100
+depositar 500
+sacar 600
+sacar 300
+depositar 100
+tarifa 300
+extrato
+extornar 2 4 10
+extrato
+end
