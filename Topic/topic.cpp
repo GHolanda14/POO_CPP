@@ -40,10 +40,18 @@ struct Topic{
     string toString(){
         stringstream ss;
         ss<<"[";
-        for(int i = 0; i < (int)cadeiras.size(); i++){
-            ss<<(i<prioridade ? '@' : '#');
+        /*for(int i = 0; i < (int)cadeiras.size(); i++){
+            ss<<(i<prioridade ? '@' : '=');
             ss<<(cadeiras[i] != nullptr ? cadeiras[i]->toString() : "");
             ss<<" ";
+        }*/
+        
+        int i = 0;
+        for(Passageiro * pass : cadeiras){
+            ss<<(i<prioridade ? '@' : '=');
+            ss<<(pass != nullptr ? pass->toString() : "");
+            ss<<" ";
+            i++;
         }
         ss<<"]";
         return ss.str();
@@ -117,7 +125,7 @@ int main(){
         if(op == "show"){
             cout<<topic.toString()<<endl;
         }
-        else if(op == "new"){
+        else if(op == "init"){
             int qnt;
             int prioridad;
             cin>>qnt>>prioridad;

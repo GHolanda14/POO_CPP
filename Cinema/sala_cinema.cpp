@@ -23,7 +23,6 @@ struct Cliente{
 
 struct Sala{
 	vector<Cliente*> cadeiras;
-
     Sala(int qtd = 0):
         cadeiras(qtd,nullptr)
 	{
