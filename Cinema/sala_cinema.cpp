@@ -9,7 +9,7 @@ struct Cliente{
 		string nome;
 		string fone;
 	
-	Cliente(string nome = "Xuxa",string fone = "4002-8922"){
+	Cliente(string nome = "",string fone = ""){
 		this->nome = nome;
 		this->fone = fone;
 	}
