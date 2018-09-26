@@ -1,0 +1,16 @@
+init 10 3 10
+show
+play
+play
+play
+play
+show
+revival
+show
+play
+play
+show
+play
+eat
+show
+end
