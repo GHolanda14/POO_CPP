@@ -1,3 +1,3 @@
 # POO_CPP
 
-So, why am i doing this?
+So, why i'm doing this?
